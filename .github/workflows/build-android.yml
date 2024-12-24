@@ -13,12 +13,13 @@ jobs:
         git clone https://github.com/ItzVladik/srceng-mod-launcher
         sudo apt-get update
         sudo apt-get install -f -y openjdk-8-jre zip apksigner imagemagick
-        ls thirdparty
     - name: Build Android (32 bit)
       run: |
+        patch thirdparty/SDL/SDL_gamecontroller.h patches/no_fake_gamepad.patch
         scripts/build-android-armv7a.sh
     - name: Build Android (64 bit)
       run: |
+        patch thirdparty/SDL/SDL_gamecontroller.h patches/no_fake_gamepad.patch
         chmod +x scripts/build-android-aarch64.sh
         scripts/build-android-aarch64.sh   
     - name: Build APK
