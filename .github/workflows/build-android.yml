@@ -15,10 +15,12 @@ jobs:
         sudo apt-get install -f -y openjdk-8-jre zip apksigner imagemagick
     - name: Build Android (32 bit)
       run: |
+        git submodule init && git submodule update
         patch thirdparty/SDL/SDL_gamecontroller.h patches/no_fake_gamepad.patch
         scripts/build-android-armv7a.sh
     - name: Build Android (64 bit)
       run: |
+        git submodule init && git submodule update
         patch thirdparty/SDL/SDL_gamecontroller.h patches/no_fake_gamepad.patch
         chmod +x scripts/build-android-aarch64.sh
         scripts/build-android-aarch64.sh   
